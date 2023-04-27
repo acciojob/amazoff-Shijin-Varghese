@@ -1,40 +1,26 @@
 package com.driver;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class Order {
 
     private String id;
-
     private int deliveryTime;
 
-    @Autowired
-    private OrderService a;
     public Order(String id, String deliveryTime) {
-        String a[]=deliveryTime.split(":");
-        int hh=converttoInt(a[0]);
-        int min=converttoInt(a[1]);
-        this.deliveryTime=hh*60+min;
+
         // The deliveryTime has to converted from string to int and then stored in the attribute
         //deliveryTime  = HH*60 + MM
-    }
-    private int converttoInt(String s) {
-          int val=Integer.parseInt(s);
-        return val;
+        this.id = id;
+
+        int hours = Integer.valueOf(deliveryTime.substring(0,2));
+        int minutes = Integer.valueOf(deliveryTime.substring(3));
+        int total = hours*60 + minutes;
+
+        this.deliveryTime = total;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setDeliveryTime(int deliveryTime) {
-        this.deliveryTime = deliveryTime;
-    }
-    public void setDeliveryTime(String deliveryTime) {
-        String a[]=deliveryTime.split(":");
-        int hh=converttoInt(a[0]);
-        int min=converttoInt(a[1]);
-        this.deliveryTime=hh*60+min;
-    }
     public int getDeliveryTime() {return deliveryTime;}
 }
